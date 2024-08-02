@@ -18,6 +18,9 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "sdb.h"
+#include "/home/pfm/ysyx/ysyx-workbench/nemu/include/memory/paddr.h"
+#include "/home/pfm/ysyx/ysyx-workbench/nemu/include/utils.h"
+#define word_t uint32_t
 
 static int is_batch_mode = false;
 
@@ -46,10 +49,79 @@ static int cmd_c(char *args) {
   cpu_exec(-1);
   return 0;
 }
-
-
+//退出
 static int cmd_q(char *args) {
+  nemu_state.state = NEMU_QUIT;
   return -1;
+}
+//单步调试
+static int cmd_si(char *args){
+  int step;
+  if (args==NULL) step=1;
+  else sscanf(args,"%d",&step);
+  cpu_exec(step);
+  return 0;
+}
+//打印信息
+static int cmd_info(char *args){  
+  if(args==NULL) printf("指令不正确\n");
+  else if(strcmp(args,"r")==0) isa_reg_display();
+  else if(strcmp(args,"w")==0) infoWatchPoint();
+  return 0;
+}
+//删除指定编号的监视点
+static int cmd_d (char *args){
+    if(args == NULL) printf("No args.\n");
+    else {
+    int NO;
+    bool success=false;
+    sscanf(args,"%d",&NO);
+    free_wpByNO(NO,&success);
+    if(success) printf("删除编号：%d 号监视点成功\n",NO);
+    }
+    return 0;
+}
+//创建监视点new_wpSet(char *expr, word_t LastValue)
+static int cmd_w(char* args){
+    bool success = true;
+    word_t Value;
+    if(strstr(args,"$pc") && strstr(args,"==")) { //设置断点
+      char* location=strstr(args,"==");
+      sscanf(location+2,"%x",&Value);
+      strcpy(args,"$pc");
+    }
+    else Value=expr(args,&success);
+    if(success) new_wpSet(args,Value);
+    else printf("创建失败\n");
+    return 0;
+}
+//表达式求值
+static int cmd_p(char *args){
+  if(args==NULL){
+      printf("指令不正确\n");
+      return 0;
+  }
+  bool success = true;
+  word_t e = expr(args, &success);
+  if(!success){
+      printf("表达式错误\n");
+  } else {
+      printf("Result = %d\n", e);
+  }
+    return 0;
+}
+//扫描内存
+static int cmd_x(char *args) {
+    if(args == NULL) printf("指令不正确\n");
+    else{
+    int n;
+    uint32_t Addr;
+    sscanf(args, "%d %x", &n, &Addr);
+    for (int i = 0; i < n; i++, Addr += 4) {
+        printf("0x%x\n", paddr_read(Addr, 4));
+    }
+    }
+    return 0;
 }
 
 static int cmd_help(char *args);
@@ -62,6 +134,12 @@ static struct {
   { "help", "Display information about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
+  { "si","Step Debug(单步调试)", cmd_si},
+  { "info", "Search information(打印寄存器/打印监视点)", cmd_info},
+  { "x", "Scan Memory(扫描内存)", cmd_x},
+  { "p", "Eval Expression(表达式求值)", cmd_p},
+  { "w", "Create wp(创建监视点)", cmd_w},
+  { "d", "Delete wp(删除监视点)", cmd_d},
 
   /* TODO: Add more commands */
 
