@@ -1,4 +1,4 @@
-STUID = ysyx_22040000
+STUID = ysyx_24070015
 STUNAME = 彭发明
 
 # DO NOT modify the following code!!!

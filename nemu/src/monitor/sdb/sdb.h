@@ -15,9 +15,13 @@
 
 #ifndef __SDB_H__
 #define __SDB_H__
-
+#define word_t uint32_t
 #include <common.h>
 
+void checkWatchPoint();
 word_t expr(char *e, bool *success);
+void infoWatchPoint();
+void free_wpByNO(int NO, bool *success);
+void new_wpSet(char *expr, word_t LastValue);
 
 #endif
