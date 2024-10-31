@@ -1,4 +1,6 @@
 /* verilator lint_off UNUSED */
+import "DPI-C" function void set_gpr_ptr(input logic [31:0] rf_ptr[]);
+
 module regfile (
   input clk,
   input  [31:0] wdata,
@@ -11,10 +13,15 @@ module regfile (
     
   always @(posedge clk) begin
     if (wen) 
-      rf[waddr] = wdata;
+      rf[waddr] <= wdata;
     else 
-      rdata = rf[raddr];
+      rdata <= rf[raddr];
   end
+
+  initial begin
+    set_gpr_ptr(rf); // 调用 DPI-C 函数
+  end
+
 endmodule
 /* verilator lint_on UNUSED */
 

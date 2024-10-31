@@ -4,7 +4,7 @@
 # Execute this makefile from the object directory:
 #    make -f Vtop.mk
 
-default: /home/pfm/ysyx/ysyx-workbench/npc/build/top
+default: Vtop
 
 ### Constants...
 # Perl executable (from $PERL)
@@ -35,37 +35,21 @@ VM_PREFIX = Vtop
 VM_MODPREFIX = Vtop
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
-	-I/home/pfm/ysyx/ysyx-workbench/nvboard/usr/include \
-	-DTOP_NAME="Vtop" \
+	-I/home/pfm/ysyx/ysyx-workbench/npc/csrc \
+	-I/usr/include/SDL2 \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
-	-lSDL2 \
-	-lSDL2_image \
-	-lSDL2 \
-	-lSDL2_image \
-	-lSDL2_ttf \
+	/home/pfm/ysyx/ysyx-workbench/npc/libnemu.so \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
 	main \
 	memory \
-	Vtop \
-	Vtop__Dpi \
-	Vtop__Syms \
-	Vtop__Trace__0 \
-	Vtop__Trace__0__Slow \
-	Vtop___024root__DepSet_h84412442__0 \
-	Vtop___024root__DepSet_h84412442__0__Slow \
-	Vtop___024root__DepSet_heccd7ead__0 \
-	Vtop___024root__DepSet_heccd7ead__0__Slow \
-	Vtop___024root__Slow \
 
 # User .cpp directories (from .cpp's on Verilator command line)
 VM_USER_DIR = \
-	/home/pfm/ysyx/ysyx-workbench/npc \
 	/home/pfm/ysyx/ysyx-workbench/npc/csrc \
-	/home/pfm/ysyx/ysyx-workbench/npc/obj_dir \
 
 
 ### Default rules...
@@ -79,31 +63,11 @@ VPATH += $(VM_USER_DIR)
 
 main.o: /home/pfm/ysyx/ysyx-workbench/npc/csrc/main.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-memory.o: /home/pfm/ysyx/ysyx-workbench/npc/memory.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-Vtop.o: /home/pfm/ysyx/ysyx-workbench/npc/obj_dir/Vtop.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-Vtop__Dpi.o: /home/pfm/ysyx/ysyx-workbench/npc/obj_dir/Vtop__Dpi.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-Vtop__Syms.o: /home/pfm/ysyx/ysyx-workbench/npc/obj_dir/Vtop__Syms.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-Vtop__Trace__0.o: /home/pfm/ysyx/ysyx-workbench/npc/obj_dir/Vtop__Trace__0.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-Vtop__Trace__0__Slow.o: /home/pfm/ysyx/ysyx-workbench/npc/obj_dir/Vtop__Trace__0__Slow.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-Vtop___024root__DepSet_h84412442__0.o: /home/pfm/ysyx/ysyx-workbench/npc/obj_dir/Vtop___024root__DepSet_h84412442__0.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-Vtop___024root__DepSet_h84412442__0__Slow.o: /home/pfm/ysyx/ysyx-workbench/npc/obj_dir/Vtop___024root__DepSet_h84412442__0__Slow.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-Vtop___024root__DepSet_heccd7ead__0.o: /home/pfm/ysyx/ysyx-workbench/npc/obj_dir/Vtop___024root__DepSet_heccd7ead__0.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-Vtop___024root__DepSet_heccd7ead__0__Slow.o: /home/pfm/ysyx/ysyx-workbench/npc/obj_dir/Vtop___024root__DepSet_heccd7ead__0__Slow.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-Vtop___024root__Slow.o: /home/pfm/ysyx/ysyx-workbench/npc/obj_dir/Vtop___024root__Slow.cpp
+memory.o: /home/pfm/ysyx/ysyx-workbench/npc/csrc/memory.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)
-/home/pfm/ysyx/ysyx-workbench/npc/build/top: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
+Vtop: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
 	$(LINK) $(LDFLAGS) $^ $(LOADLIBES) $(LDLIBS) $(LIBS) $(SC_LIBS) -o $@
 
 

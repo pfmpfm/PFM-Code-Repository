@@ -13,11 +13,14 @@ VL_ATTR_COLD void Vtop___024root___eval_static(Vtop___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval_static\n"); );
 }
 
+VL_ATTR_COLD void Vtop___024root___eval_initial__TOP(Vtop___024root* vlSelf);
+
 VL_ATTR_COLD void Vtop___024root___eval_initial(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval_initial\n"); );
     // Body
+    Vtop___024root___eval_initial__TOP(vlSelf);
     vlSelf->__Vtrigrprev__TOP__clk = vlSelf->clk;
 }
 
@@ -152,8 +155,6 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__rs1 = vlSelf->top__DOT__rf[(0x1fU 
                                                   & (vlSelf->inst 
                                                      >> 0xfU))];
-    vlSelf->top__DOT__alu_result = ((vlSelf->inst >> 0x14U) 
-                                    + vlSelf->top__DOT__rs1);
 }
 
 VL_ATTR_COLD void Vtop___024root___eval_stl(Vtop___024root* vlSelf) {
@@ -226,7 +227,6 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
         vlSelf->top__DOT__rf[__Vi0] = 0;
     }
     vlSelf->top__DOT__rs1 = 0;
-    vlSelf->top__DOT__alu_result = 0;
     for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
         vlSelf->top__DOT____Vcellout__regfile2__rf[__Vi0] = 0;
     }

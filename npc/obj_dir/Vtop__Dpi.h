@@ -18,8 +18,10 @@ extern "C" {
     // DPI IMPORTS
     // DPI import at /home/pfm/ysyx/ysyx-workbench/npc/vsrc/idu.v:9:30
     extern void ebreak();
-    // DPI import at /home/pfm/ysyx/ysyx-workbench/npc/vsrc/top.v:8:30
+    // DPI import at /home/pfm/ysyx/ysyx-workbench/npc/vsrc/top.v:9:30
     extern void itrace(int inst);
+    // DPI import at /home/pfm/ysyx/ysyx-workbench/npc/vsrc/regfile.v:2:30
+    extern void set_gpr_ptr(const svOpenArrayHandle rf_ptr);
 
 #ifdef __cplusplus
 }
