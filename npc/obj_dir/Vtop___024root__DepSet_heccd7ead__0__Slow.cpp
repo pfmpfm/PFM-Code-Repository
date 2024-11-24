@@ -54,7 +54,7 @@ VL_ATTR_COLD void Vtop___024root___eval_settle(Vtop___024root* vlSelf) {
 #ifdef VL_DEBUG
                 Vtop___024root___dump_triggers__stl(vlSelf);
 #endif
-                VL_FATAL_MT("/home/pfm/ysyx/ysyx-workbench/npc/vsrc/top.v", 2, "", "Settle region did not converge.");
+                VL_FATAL_MT("/home/pfm/ysyx/ysyx-workbench/npc/vsrc/top.v", 3, "", "Settle region did not converge.");
             }
             vlSelf->__VstlIterCount = ((IData)(1U) 
                                        + vlSelf->__VstlIterCount);
@@ -78,84 +78,7 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__stl(Vtop___024root* vlSelf) {
 }
 #endif  // VL_DEBUG
 
-void Vtop___024root____Vdpiimwrap_top__DOT__IDU__DOT__ebreak_TOP();
-
-VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
-    if (false && vlSelf) {}  // Prevent unused
-    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___stl_sequent__TOP__0\n"); );
-    // Body
-    if ((IData)((0x100073U == (0xfff0007fU & vlSelf->inst)))) {
-        Vtop___024root____Vdpiimwrap_top__DOT__IDU__DOT__ebreak_TOP();
-    }
-    vlSelf->top__DOT__rf[0x1fU] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0x1fU];
-    vlSelf->top__DOT__rf[0x1eU] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0x1eU];
-    vlSelf->top__DOT__rf[0x1dU] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0x1dU];
-    vlSelf->top__DOT__rf[0x1cU] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0x1cU];
-    vlSelf->top__DOT__rf[0x1bU] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0x1bU];
-    vlSelf->top__DOT__rf[0x1aU] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0x1aU];
-    vlSelf->top__DOT__rf[0x19U] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0x19U];
-    vlSelf->top__DOT__rf[0x18U] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0x18U];
-    vlSelf->top__DOT__rf[0x17U] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0x17U];
-    vlSelf->top__DOT__rf[0x16U] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0x16U];
-    vlSelf->top__DOT__rf[0x15U] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0x15U];
-    vlSelf->top__DOT__rf[0x14U] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0x14U];
-    vlSelf->top__DOT__rf[0x13U] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0x13U];
-    vlSelf->top__DOT__rf[0x12U] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0x12U];
-    vlSelf->top__DOT__rf[0x11U] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0x11U];
-    vlSelf->top__DOT__rf[0x10U] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0x10U];
-    vlSelf->top__DOT__rf[0xfU] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0xfU];
-    vlSelf->top__DOT__rf[0xeU] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0xeU];
-    vlSelf->top__DOT__rf[0xdU] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0xdU];
-    vlSelf->top__DOT__rf[0xcU] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0xcU];
-    vlSelf->top__DOT__rf[0xbU] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0xbU];
-    vlSelf->top__DOT__rf[0xaU] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0xaU];
-    vlSelf->top__DOT__rf[9U] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [9U];
-    vlSelf->top__DOT__rf[8U] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [8U];
-    vlSelf->top__DOT__rf[7U] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [7U];
-    vlSelf->top__DOT__rf[6U] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [6U];
-    vlSelf->top__DOT__rf[5U] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [5U];
-    vlSelf->top__DOT__rf[4U] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [4U];
-    vlSelf->top__DOT__rf[3U] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [3U];
-    vlSelf->top__DOT__rf[2U] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [2U];
-    vlSelf->top__DOT__rf[1U] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [1U];
-    vlSelf->top__DOT__rf[0U] = vlSelf->top__DOT____Vcellout__regfile2__rf
-        [0U];
-    vlSelf->top__DOT__rs1 = vlSelf->top__DOT__rf[(0x1fU 
-                                                  & (vlSelf->inst 
-                                                     >> 0xfU))];
-}
+VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf);
 
 VL_ATTR_COLD void Vtop___024root___eval_stl(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
@@ -170,21 +93,6 @@ VL_ATTR_COLD void Vtop___024root___eval_stl(Vtop___024root* vlSelf) {
 }
 
 #ifdef VL_DEBUG
-VL_ATTR_COLD void Vtop___024root___dump_triggers__ico(Vtop___024root* vlSelf) {
-    if (false && vlSelf) {}  // Prevent unused
-    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___dump_triggers__ico\n"); );
-    // Body
-    if ((1U & (~ (IData)(vlSelf->__VicoTriggered.any())))) {
-        VL_DBG_MSGF("         No triggers active\n");
-    }
-    if (vlSelf->__VicoTriggered.at(0U)) {
-        VL_DBG_MSGF("         'ico' region trigger index 0 is active: Internal 'ico' trigger - first iteration\n");
-    }
-}
-#endif  // VL_DEBUG
-
-#ifdef VL_DEBUG
 VL_ATTR_COLD void Vtop___024root___dump_triggers__act(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
@@ -195,6 +103,9 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__act(Vtop___024root* vlSelf) {
     }
     if (vlSelf->__VactTriggered.at(0U)) {
         VL_DBG_MSGF("         'act' region trigger index 0 is active: @(posedge clk)\n");
+    }
+    if (vlSelf->__VactTriggered.at(1U)) {
+        VL_DBG_MSGF("         'act' region trigger index 1 is active: @(negedge clk)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -211,6 +122,9 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__nba(Vtop___024root* vlSelf) {
     if (vlSelf->__VnbaTriggered.at(0U)) {
         VL_DBG_MSGF("         'nba' region trigger index 0 is active: @(posedge clk)\n");
     }
+    if (vlSelf->__VnbaTriggered.at(1U)) {
+        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @(negedge clk)\n");
+    }
 }
 #endif  // VL_DEBUG
 
@@ -221,15 +135,70 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     // Body
     vlSelf->clk = 0;
     vlSelf->rst = 0;
-    vlSelf->inst = 0;
-    vlSelf->pc = 0;
+    vlSelf->debug_rs1_data = 0;
+    vlSelf->debug_rs2_data = 0;
+    vlSelf->debug_imm = 0;
+    vlSelf->debug_write_idx = 0;
+    vlSelf->debug_write_data = 0;
+    vlSelf->debug_rw_addr = 0;
+    vlSelf->top__DOT__inst = 0;
+    vlSelf->top__DOT__imm = 0;
+    vlSelf->top__DOT__alu_op = 0;
+    vlSelf->top__DOT__mem_op = 0;
+    vlSelf->top__DOT__ex_op = 0;
+    vlSelf->top__DOT__pc_op = 0;
+    vlSelf->top__DOT__rs1_data = 0;
+    vlSelf->top__DOT__rs2_data = 0;
+    vlSelf->top__DOT__write_data = 0;
+    vlSelf->top__DOT__ex_alu_data = 0;
+    vlSelf->top__DOT__compare_result = 0;
+    vlSelf->top__DOT__load_valid = 0;
+    vlSelf->top__DOT__rd_2 = 0;
+    vlSelf->top__DOT__read_data = 0;
+    vlSelf->top__DOT__rw_addr = 0;
+    vlSelf->top__DOT___pc__DOT__is_branch = 0;
+    vlSelf->top__DOT___pc__DOT__is_inc4 = 0;
+    vlSelf->top__DOT___pc__DOT__current_pc = 0;
+    vlSelf->top__DOT___pc__DOT__next_pc = 0;
+    vlSelf->top__DOT__idu__DOT__I_type = 0;
+    vlSelf->top__DOT__idu__DOT__U_type = 0;
+    vlSelf->top__DOT__idu__DOT__Inst_jalr = 0;
+    vlSelf->top__DOT__idu__DOT__isNeed_rs1 = 0;
+    vlSelf->top__DOT__idu__DOT____VdfgTmp_hda0a4f99__0 = 0;
+    vlSelf->top__DOT__idu__DOT____VdfgTmp_he69f398c__0 = 0;
+    vlSelf->top__DOT__idu__DOT____VdfgTmp_he7d3bfbe__0 = 0;
+    vlSelf->top__DOT__idu__DOT____VdfgTmp_hd3ddd1c8__0 = 0;
+    vlSelf->top__DOT__idu__DOT____VdfgTmp_hd3e51328__0 = 0;
+    vlSelf->top__DOT__idu__DOT____VdfgTmp_he69b39c7__0 = 0;
+    vlSelf->top__DOT__idu__DOT____VdfgTmp_he48ad066__0 = 0;
+    vlSelf->top__DOT__idu__DOT____VdfgTmp_he979b2f1__0 = 0;
+    vlSelf->top__DOT__idu__DOT____VdfgTmp_h873f971e__0 = 0;
+    vlSelf->top__DOT__idu__DOT____VdfgTmp_hdde88109__0 = 0;
+    vlSelf->top__DOT__idu__DOT____VdfgTmp_had26422b__0 = 0;
     for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
-        vlSelf->top__DOT__rf[__Vi0] = 0;
+        vlSelf->top__DOT__Regfile__DOT__rf[__Vi0] = 0;
     }
-    vlSelf->top__DOT__rs1 = 0;
-    for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
-        vlSelf->top__DOT____Vcellout__regfile2__rf[__Vi0] = 0;
-    }
+    vlSelf->top__DOT__exu__DOT__rs1_rs2 = 0;
+    vlSelf->top__DOT__exu__DOT__rs1_imm = 0;
+    vlSelf->top__DOT__exu__DOT__pc_4 = 0;
+    vlSelf->top__DOT__exu__DOT__alu_src1 = 0;
+    vlSelf->top__DOT__exu__DOT__alu_src2 = 0;
+    vlSelf->top__DOT__exu__DOT__ALU__DOT__adder_cout = 0;
+    vlSelf->top__DOT__exu__DOT__ALU__DOT__adder_result = 0;
+    vlSelf->top__DOT__exu__DOT__ALU__DOT__adder_b = 0;
+    vlSelf->top__DOT__exu__DOT__ALU__DOT__isSUB = 0;
+    vlSelf->top__DOT__exu__DOT__ALU__DOT__slt_result = 0;
+    vlSelf->top__DOT__exu__DOT__ALU__DOT__mulh_64_result = 0;
+    vlSelf->top__DOT__exu__DOT__ALU__DOT____VdfgTmp_ha85d5376__0 = 0;
+    vlSelf->top__DOT__exu__DOT__ALU__DOT____VdfgTmp_h50ddfa4f__0 = 0;
+    vlSelf->top__DOT__exu__DOT__ALU__DOT____VdfgTmp_h51fa2515__0 = 0;
+    vlSelf->top__DOT__mem__DOT__is1byte = 0;
+    vlSelf->top__DOT__mem__DOT__is2byte = 0;
+    vlSelf->top__DOT__mem__DOT__unsigned_load = 0;
+    vlSelf->top__DOT__mem__DOT__signed_load = 0;
+    vlSelf->top__DOT__mem__DOT____VdfgTmp_h3c6dcd3f__0 = 0;
+    vlSelf->__VdfgTmp_h498b5a69__0 = 0;
+    vlSelf->__Vfunc_mem_read__5__Vfuncout = 0;
     vlSelf->__Vtrigrprev__TOP__clk = 0;
     for (int __Vi0 = 0; __Vi0 < 2; ++__Vi0) {
         vlSelf->__Vm_traceActivity[__Vi0] = 0;

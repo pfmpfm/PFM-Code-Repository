@@ -8,7 +8,8 @@
 typedef uint32_t paddr_t;
 static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {}; // 内存指针
 
-word_t pmem_read(paddr_t addr);
+word_t pmem_read(paddr_t addr, int len);
+void pmem_write(paddr_t addr, int wdata, int len);
 long in_img();
 uint8_t *guest_to_host(paddr_t paddr);
 

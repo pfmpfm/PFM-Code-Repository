@@ -16,15 +16,27 @@ typedef uint32_t paddr_t;
 typedef uint32_t vaddr_t;
 typedef uint32_t word_t;
 
+bool difftest_error = false;
+
 Vtop *top; 
-uint32_t (*cpu_gpr) = NULL;
+uint32_t *cpu_gpr;
+int PC;
+/*
+typedef struct
+{
+  uint32_t *gpr;
+  uint32_t PC;
+  word_t csr[4];
+} NPC_state; 
+NPC_state *npc = (NPC_state *)malloc(sizeof(NPC_state));
+*/
 
 typedef struct
 {
   word_t gpr[32];
   vaddr_t pc;
   word_t csr[4];
-}CPU_state; 
+} CPU_state; 
 
 enum
 {
@@ -39,11 +51,40 @@ extern "C" void ebreak(){
 }
 
 extern "C" void itrace(int inst){
-    printf("inst : %08x\n",inst);
+    printf("\33[1;32minst : %08x\n",inst);
 }
 
 extern "C" void set_gpr_ptr(const svOpenArrayHandle r) {
     cpu_gpr = (uint32_t *)(((VerilatedDpiOpenVar *)r)->datap());
+    
+   // memcpy(npc->gpr, (uint32_t *)(((VerilatedDpiOpenVar *)r)->datap()), 32 * sizeof(uint32_t));
+
+}
+
+extern "C" int mem_read(int raddr, int len)
+{
+    if(raddr >= 0x80000000){
+      int read_data = pmem_read(raddr, len);
+      printf("===========raddr:%8x  data:%d\n",raddr,read_data);
+      return read_data;
+    }
+    //else printf("读地址不正确！raddr:%8x\n",raddr);
+    return 0;
+}
+
+extern "C" void mem_write(int waddr, int wdata, int len)
+{
+    if(waddr >= 0x80000000){
+      pmem_write(waddr, wdata, len);
+      printf("===========waddr:%8x  data:%d\n",waddr,wdata);
+    }
+    //else printf("写地址不正确！waddr:%8x\n",waddr);
+    return;
+}
+
+extern "C" void read_pc(int pc)
+{
+    PC=pc;
 }
 
 void single_cycle(Vtop* top,VerilatedContext* contextp,VerilatedVcdC* tfp) {
@@ -64,7 +105,7 @@ static void reset(int n,Vtop* top,VerilatedContext* contextp,VerilatedVcdC* tfp)
 
 void scanMemory(int count,word_t addr){
     for(int i=0;i<count;i++){
-    word_t memoryValue=pmem_read(addr);
+    word_t memoryValue=pmem_read(addr,4);
     printf("addr [0x%x] : %08x\n",addr,memoryValue);
     addr = addr+4;
     }
@@ -89,7 +130,7 @@ void difftest_skip_ref()
 
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc)
 {
-  if(memcmp(ref_r, cpu_gpr, 32 * 4) == 0 && ref_r->pc == pc) 
+  if(memcmp(ref_r, cpu_gpr, 32 * 4) == 0 && ref_r->pc == PC ) // ref_r->pc是下一条pc，而PC是当前pc
     return true;
   else
     return false;
@@ -101,6 +142,7 @@ void init_difftest(const char *ref_so_file, long img_size, int port)
   //cpu_gpr[32] = top->inst_sram_addr;
 
   void *handle;
+
   handle = dlopen(ref_so_file, RTLD_LAZY);
   if (!handle) {
     fprintf(stderr, "============================================Error: %s\n", dlerror());
@@ -124,13 +166,25 @@ void init_difftest(const char *ref_so_file, long img_size, int port)
   ref_difftest_init(port);
   ref_difftest_memcpy(RESET_VECTOR, guest_to_host(RESET_VECTOR), img_size, DIFFTEST_TO_REF); // 将DUT的guest memory拷贝到REF中
   ref_difftest_regcpy(cpu_gpr, DIFFTEST_TO_REF);                                             // 将DUT的寄存器状态拷贝到REF中
+
 }
 
 static void checkregs(CPU_state *ref, vaddr_t pc)
-{
+{	/*
+  if (isa_difftest_checkregs(ref, pc)){
+  printf("\33[1;31mNPC ABORT at next_pc = 0x%8x  NEMU ABORT at next_pc = 0x%8x\n", PC, ref->pc);
+  printf("NPC = rs1_data: %d rs2_data: %d rd: %d imm: %d wb_data: %d rw_addr: %8x\n",top->debug_rs1_data,top->debug_rs2_data,top->debug_write_idx,top->debug_imm,top->debug_write_data,top->debug_rw_addr);
+  printf("-----------NPC寄存器------------\n");
+  for(int i=0;i<32;i++) printf("Reg%2d value : %8x\n",i,cpu_gpr[i]);
+  printf("-----------NEMU寄存器------------\n");
+  for(int i=0;i<32;i++) printf("Reg%2d value : %8x\n",i,ref->gpr[i]);
+  }
+*/
   if (!isa_difftest_checkregs(ref, pc))
   {
-    printf("\33[1;31mNPC ABORT at pc = 0x%8x\n", pc);
+    printf("NPC = rs1_data: %d rs2_data: %d rd: %d imm: %d wb_data: %d rw_addr: %8x\n",top->debug_rs1_data,top->debug_rs2_data,top->debug_write_idx,top->debug_imm,top->debug_write_data,top->debug_rw_addr);    
+    printf("\33[1;31m-----------------------------------------------------------------\n");
+    printf("NPC ABORT at next_pc = 0x%8x  NEMU ABORT at next_pc = 0x%8x\n", PC, ref->pc);
     //打印出NPC的寄存器
     printf("-----------NPC寄存器------------\n");
     for(int i=0;i<32;i++) printf("Reg%2d value : %8x\n",i,cpu_gpr[i]);
@@ -139,8 +193,10 @@ static void checkregs(CPU_state *ref, vaddr_t pc)
     for(int i=0;i<32;i++) printf("Reg%2d value : %8x\n",i,ref->gpr[i]);
     //打印出错指令
     printf("------------出错指令------------\n");
-    word_t inst = pmem_read(pc);
+    word_t inst = pmem_read(pc,4);
     printf("wrong inst is : %08x\n",inst);
+    printf("-----------------------------------------------------------------\n");
+    difftest_error = true;
   }
 }
 
@@ -164,7 +220,6 @@ void difftest_step(vaddr_t pc)
 
   ref_difftest_exec(1,  pc);                         // ref执行一次
   ref_difftest_regcpy(&ref_r, DIFFTEST_TO_DUT); // 将ref中的寄存器状态备份到ref_r中，比较ref_r和nemu的寄存器状态
-
   checkregs(&ref_r, pc);
 
 }
@@ -186,18 +241,35 @@ int main() {
     long img_size=in_img();
     static const char *diff_so_file = "/home/pfm/ysyx/ysyx-workbench/npc/libnemu.so";
     //init_difftest(diff_so_file, img_size, 1234);
-    paddr_t pc = 0x80000000;
     //scanMemory(10,0x80000000);//打印内存 nemu当中x 10 0x80000000
     
     for (int i = 0;; i++) {
+        if(difftest_error){
+          /*
+          single_cycle(top,contextp,tfp);
+          #ifdef CONFIG_DIFFTEST
+          difftest_step(PC-4);     
+          #endif 
+          */
+          break;
+        } 
 
-        top->inst = pmem_read(pc);
-        single_cycle(top,contextp,tfp);
-        if(i==0) init_difftest(diff_so_file, img_size, 1234);
-        difftest_step(pc);
-        pc += 4;
+        if(i==0){
+          top->rst=1;
+          single_cycle(top,contextp,tfp);
+          top->rst=0;
+          #ifdef CONFIG_DIFFTEST
+          init_difftest(diff_so_file, img_size, 1234);        
+          #endif 
+        }
+        else{
+          single_cycle(top,contextp,tfp);
+          #ifdef CONFIG_DIFFTEST
+          //printf("NEMU ABOUT at pc = %8x\n",PC);
+          difftest_step(PC-4);     
+          #endif 
+        }
     }
-
     top->final();
     tfp->close();
     

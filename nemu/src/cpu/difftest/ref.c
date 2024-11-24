@@ -18,6 +18,8 @@
 #include <difftest-def.h>
 #include <memory/paddr.h>
 
+bool init_pc = true; //pc值有且仅有一次初始化
+
 // __attribute__((visibility("default")))）将这些函数标记为可导出
 
 
@@ -42,9 +44,13 @@ void __attribute__((visibility("default"))) difftest_regcpy(void *dut, bool dire
 }
 
 // 让REF执行`n`条指令
-void __attribute__((visibility("default"))) difftest_exec(uint64_t n, paddr_t dut_pc) {
-  cpu.pc=dut_pc;
-  cpu_exec(n);
+void __attribute__((visibility("default"))) difftest_exec(uint32_t n, paddr_t dut_pc) {
+  if(init_pc){
+    cpu.pc=dut_pc;
+    init_pc=false;
+   }
+   cpu_exec(n);
+   //printf("NEMU PC: %8x\n",cpu.pc);
 }
 
 void __attribute__((visibility("default"))) difftest_raise_intr(word_t NO) {

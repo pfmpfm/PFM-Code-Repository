@@ -14,8 +14,12 @@ Vtop::Vtop(VerilatedContext* _vcontextp__, const char* _vcname__)
     , vlSymsp{new Vtop__Syms(contextp(), _vcname__, this)}
     , clk{vlSymsp->TOP.clk}
     , rst{vlSymsp->TOP.rst}
-    , inst{vlSymsp->TOP.inst}
-    , pc{vlSymsp->TOP.pc}
+    , debug_rs1_data{vlSymsp->TOP.debug_rs1_data}
+    , debug_rs2_data{vlSymsp->TOP.debug_rs2_data}
+    , debug_imm{vlSymsp->TOP.debug_imm}
+    , debug_write_idx{vlSymsp->TOP.debug_write_idx}
+    , debug_write_data{vlSymsp->TOP.debug_write_data}
+    , debug_rw_addr{vlSymsp->TOP.debug_rw_addr}
     , __PVT____024unit{vlSymsp->TOP.__PVT____024unit}
     , rootp{&(vlSymsp->TOP)}
 {

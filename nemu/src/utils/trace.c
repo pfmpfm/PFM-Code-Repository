@@ -56,9 +56,9 @@ void display_inst()
 }
 //ITRACE-END
 //MTRACE-START
-void display_memory_read(paddr_t addr, int len)
+void display_memory_read(paddr_t addr, int len, word_t data)
 {
-    printf(ANSI_FMT("read memory: ", ANSI_FG_BLUE) FMT_PADDR ", the len is %d\n", addr, len);
+    printf(ANSI_FMT("read memory: ", ANSI_FG_BLUE) FMT_PADDR ", the len is %d, the read data is " FMT_WORD "\n", addr, len, data);
 }
 
 void display_memory_write(paddr_t addr, int len, word_t data)
