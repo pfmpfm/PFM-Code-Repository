@@ -10,8 +10,7 @@
 uint8_t *guest_to_host(paddr_t paddr);
 void init_mem();
 
-static const char *img_file = "./win_test/bit-riscv32-nemu.bin";// 装载程序镜像的文件指针
-long in_img() {
+long in_img(const char *img_file) {
     init_mem();
 
     FILE *fp = fopen(img_file, "rb");
@@ -64,7 +63,7 @@ word_t pmem_read(paddr_t addr, int len){
       (pmem[addr-CONFIG_MBASE + 2] << 16) +
       (pmem[addr-CONFIG_MBASE + 3] << 24);
     }
-    printf("addr: %8x start : %8x diff: %d value: %d\n",addr,start,diff,value);
+    //printf("addr: %8x start : %8x diff: %d value: %d\n",addr,start,diff,value);
     return value;
 }
 

@@ -17,6 +17,7 @@
 #include <cpu/cpu.h>
 #include <difftest-def.h>
 #include <memory/paddr.h>
+#include "../../utils/trace.h"
 
 bool init_pc = true; //pc值有且仅有一次初始化
 
@@ -48,6 +49,7 @@ void __attribute__((visibility("default"))) difftest_exec(uint32_t n, paddr_t du
   if(init_pc){
     cpu.pc=dut_pc;
     init_pc=false;
+    return;
    }
    cpu_exec(n);
    //printf("NEMU PC: %8x\n",cpu.pc);

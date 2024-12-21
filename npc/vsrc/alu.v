@@ -62,25 +62,22 @@ wire [63:0] mulhu_64_result = {{32'b0},alu_src1[31:0]} * {{32'b0},alu_src2[31:0]
 wire [31:0] mulh_32_result = mulh_64_result[63:32];
 wire [31:0] mulhu_32_result = mulh_64_result[63:32];
 
+
 assign alu_result = (alu_op == 5'd1 || alu_op == 5'd2) ? adder_result :
                     (alu_op == 5'd3) ? (alu_src1 ^ alu_src2) :
                     (alu_op == 5'd4) ? (alu_src1 | alu_src2) :
                     (alu_op == 5'd5) ? (alu_src1 & alu_src2) :
                     (alu_op == 5'd6) ? (alu_src1 <<  alu_src2[4:0]) :
-					(alu_op == 5'd7) ? (alu_src1 >>  alu_src2[4:0]) :
-					(alu_op == 5'd8) ? ($signed(alu_src1) >>> alu_src2[4:0]) :
+                    (alu_op == 5'd7) ? (alu_src1 >>  alu_src2[4:0]) :
+                    (alu_op == 5'd8) ? ((alu_src1 >> alu_src2[4:0]) | ({32{alu_src1[31]}} << (32 - alu_src2[4:0]))) :
                     (alu_op == 5'd17) ? (alu_src1 * alu_src2) :
                     (alu_op == 5'd18) ? mulh_32_result :
                     (alu_op == 5'd19) ? mulhu_32_result :
-                    (alu_op == 5'd20) ? $signed(alu_src1) / $signed(alu_src2) :
-                    (alu_op == 5'd21) ? (alu_src1 / alu_src2) :
-                    (alu_op == 5'd22) ? ($signed(alu_src1) % $signed(alu_src2)) :
-                    (alu_op == 5'd23) ? (alu_src1 % alu_src2) :
-                    (ex_op  == 4'd5 || ex_op  == 4'd6)  ? (alu_src1 + alu_src2) :
-                    32'b0 ;
-
-
-                    
+                    (alu_op == 5'd20) ? ((alu_src2 != 0) ? $signed(alu_src1) / $signed(alu_src2) : 32'b0) :
+                    (alu_op == 5'd21) ? ((alu_src2 != 0) ? alu_src1 / alu_src2 : 32'b0) :
+                    (alu_op == 5'd22) ? ((alu_src2 != 0) ? $signed($signed(alu_src1) % $signed(alu_src2)) : 32'b0) :
+                    (alu_op == 5'd23) ? ((alu_src2 != 0) ? (alu_src1 % alu_src2) : 32'b0) :
+                    32'b0;
 
 assign compare_result = (alu_op == 5'd9) ? slt_result :
                         (alu_op == 5'd10) ? sltu_result :

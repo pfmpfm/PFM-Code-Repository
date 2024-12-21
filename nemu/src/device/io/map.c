@@ -69,4 +69,5 @@ void map_write(paddr_t addr, int len, word_t data, IOMap *map) {
   host_write(map->space + offset, len, data);
   invoke_callback(map->callback, offset, len, true);
   IFDEF(CONFIG_DTRACE, Log("Write device %10s : address = " FMT_PADDR ", len = %d\n", map->name , addr, len));
+  // printf("Write device %10s : address = " FMT_PADDR ", len = %d, data = %x\n", map->name , addr, len, data);
 }

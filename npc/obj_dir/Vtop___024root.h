@@ -56,7 +56,6 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__mem__DOT__unsigned_load;
         CData/*0:0*/ top__DOT__mem__DOT__signed_load;
         CData/*0:0*/ top__DOT__mem__DOT____VdfgTmp_h3c6dcd3f__0;
-        CData/*0:0*/ __VdfgTmp_h498b5a69__0;
         CData/*0:0*/ __Vtrigrprev__TOP__clk;
         CData/*0:0*/ __VactContinue;
         VL_OUT(debug_rs1_data,31,0);
@@ -77,17 +76,16 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT___pc__DOT__next_pc;
         IData/*31:0*/ top__DOT__exu__DOT__alu_src1;
         IData/*31:0*/ top__DOT__exu__DOT__alu_src2;
+        IData/*31:0*/ top__DOT__exu__DOT__alu_result;
         IData/*31:0*/ top__DOT__exu__DOT__ALU__DOT__adder_result;
         IData/*31:0*/ top__DOT__exu__DOT__ALU__DOT__adder_b;
         IData/*31:0*/ top__DOT__exu__DOT__ALU__DOT____VdfgTmp_ha85d5376__0;
-        IData/*31:0*/ top__DOT__exu__DOT__ALU__DOT____VdfgTmp_h50ddfa4f__0;
-        IData/*31:0*/ top__DOT__exu__DOT__ALU__DOT____VdfgTmp_h51fa2515__0;
+        IData/*31:0*/ top__DOT__exu__DOT__ALU__DOT____VdfgTmp_h1aa49d83__0;
         IData/*31:0*/ __Vfunc_mem_read__5__Vfuncout;
+        IData/*31:0*/ __VstlIterCount;
     };
     struct {
-        IData/*31:0*/ __VstlIterCount;
         IData/*31:0*/ __VactIterCount;
-        QData/*63:0*/ top__DOT__exu__DOT__ALU__DOT__mulh_64_result;
         VlUnpacked<IData/*31:0*/, 32> top__DOT__Regfile__DOT__rf;
         VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
     };

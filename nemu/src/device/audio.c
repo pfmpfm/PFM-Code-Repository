@@ -70,7 +70,6 @@ static void audio_io_handler(uint32_t offset, int len, bool is_write) {
   }
 }
 
-
 void init_audio() {
   uint32_t space_size = sizeof(uint32_t) * nr_reg;
   audio_base = (uint32_t *)new_space(space_size);

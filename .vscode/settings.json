@@ -1,6 +1,11 @@
 {
     "files.associations": {
         "*.inc": "cpp",
-        "common.h": "c"
-    }
+        "common.h": "c",
+        "bitset": "cpp",
+        "chrono": "cpp",
+        "algorithm": "cpp",
+        "new": "cpp"
+    },
+    "files.autoSave": "afterDelay"
 }

@@ -7,7 +7,7 @@
 #include <device/mmio.h>
 #include <isa.h>
 
-#define INST_NUM 16
+#define INST_NUM 10000
 typedef uint32_t word_t;
 //ITRACE-START
 typedef struct
@@ -58,12 +58,12 @@ void display_inst()
 //MTRACE-START
 void display_memory_read(paddr_t addr, int len, word_t data)
 {
-    printf(ANSI_FMT("read memory: ", ANSI_FG_BLUE) FMT_PADDR ", the len is %d, the read data is " FMT_WORD "\n", addr, len, data);
+    printf(ANSI_FMT("NEMU read memory: ", ANSI_FG_BLUE) FMT_PADDR ", the len is %d, the read data is " FMT_WORD "\n", addr, len, data);
 }
 
 void display_memory_write(paddr_t addr, int len, word_t data)
 {
-    printf(ANSI_FMT("write memory: ", ANSI_FG_YELLOW) FMT_PADDR ", the len is %d, the written data is " FMT_WORD "\n", addr, len, data);
+    printf(ANSI_FMT("NEMU write memory: ", ANSI_FG_YELLOW) FMT_PADDR ", the len is %d, the written data is " FMT_WORD "\n", addr, len, data);
 }
 //MTRACE-END
 //FTRACE-START

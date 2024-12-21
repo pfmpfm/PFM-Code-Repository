@@ -35,12 +35,14 @@ VM_PREFIX = Vtop
 VM_MODPREFIX = Vtop
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
-	-I/home/pfm/ysyx/ysyx-workbench/npc/csrc \
+	-I/home/pfm/ysyx2/ysyx-workbench/npc/csrc \
 	-I/usr/include/SDL2 \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
-	/home/pfm/ysyx/ysyx-workbench/npc/libnemu.so \
+	/home/pfm/ysyx2/ysyx-workbench/npc/libnemu.so \
+	-lSDL2 \
+	  \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
@@ -49,7 +51,7 @@ VM_USER_CLASSES = \
 
 # User .cpp directories (from .cpp's on Verilator command line)
 VM_USER_DIR = \
-	/home/pfm/ysyx/ysyx-workbench/npc/csrc \
+	/home/pfm/ysyx2/ysyx-workbench/npc/csrc \
 
 
 ### Default rules...
@@ -61,9 +63,9 @@ include $(VERILATOR_ROOT)/include/verilated.mk
 ### Executable rules... (from --exe)
 VPATH += $(VM_USER_DIR)
 
-main.o: /home/pfm/ysyx/ysyx-workbench/npc/csrc/main.cpp
+main.o: /home/pfm/ysyx2/ysyx-workbench/npc/csrc/main.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-memory.o: /home/pfm/ysyx/ysyx-workbench/npc/csrc/memory.cpp
+memory.o: /home/pfm/ysyx2/ysyx-workbench/npc/csrc/memory.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)

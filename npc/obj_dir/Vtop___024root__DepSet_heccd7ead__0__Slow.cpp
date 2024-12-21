@@ -54,7 +54,7 @@ VL_ATTR_COLD void Vtop___024root___eval_settle(Vtop___024root* vlSelf) {
 #ifdef VL_DEBUG
                 Vtop___024root___dump_triggers__stl(vlSelf);
 #endif
-                VL_FATAL_MT("/home/pfm/ysyx/ysyx-workbench/npc/vsrc/top.v", 3, "", "Settle region did not converge.");
+                VL_FATAL_MT("/home/pfm/ysyx2/ysyx-workbench/npc/vsrc/top.v", 3, "", "Settle region did not converge.");
             }
             vlSelf->__VstlIterCount = ((IData)(1U) 
                                        + vlSelf->__VstlIterCount);
@@ -183,21 +183,19 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__exu__DOT__pc_4 = 0;
     vlSelf->top__DOT__exu__DOT__alu_src1 = 0;
     vlSelf->top__DOT__exu__DOT__alu_src2 = 0;
+    vlSelf->top__DOT__exu__DOT__alu_result = 0;
     vlSelf->top__DOT__exu__DOT__ALU__DOT__adder_cout = 0;
     vlSelf->top__DOT__exu__DOT__ALU__DOT__adder_result = 0;
     vlSelf->top__DOT__exu__DOT__ALU__DOT__adder_b = 0;
     vlSelf->top__DOT__exu__DOT__ALU__DOT__isSUB = 0;
     vlSelf->top__DOT__exu__DOT__ALU__DOT__slt_result = 0;
-    vlSelf->top__DOT__exu__DOT__ALU__DOT__mulh_64_result = 0;
     vlSelf->top__DOT__exu__DOT__ALU__DOT____VdfgTmp_ha85d5376__0 = 0;
-    vlSelf->top__DOT__exu__DOT__ALU__DOT____VdfgTmp_h50ddfa4f__0 = 0;
-    vlSelf->top__DOT__exu__DOT__ALU__DOT____VdfgTmp_h51fa2515__0 = 0;
+    vlSelf->top__DOT__exu__DOT__ALU__DOT____VdfgTmp_h1aa49d83__0 = 0;
     vlSelf->top__DOT__mem__DOT__is1byte = 0;
     vlSelf->top__DOT__mem__DOT__is2byte = 0;
     vlSelf->top__DOT__mem__DOT__unsigned_load = 0;
     vlSelf->top__DOT__mem__DOT__signed_load = 0;
     vlSelf->top__DOT__mem__DOT____VdfgTmp_h3c6dcd3f__0 = 0;
-    vlSelf->__VdfgTmp_h498b5a69__0 = 0;
     vlSelf->__Vfunc_mem_read__5__Vfuncout = 0;
     vlSelf->__Vtrigrprev__TOP__clk = 0;
     for (int __Vi0 = 0; __Vi0 < 2; ++__Vi0) {

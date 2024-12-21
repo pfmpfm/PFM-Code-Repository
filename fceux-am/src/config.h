@@ -5,8 +5,8 @@
 #define SIZE_OPT
 
 #define SOUND_NONE 0
-#define SOUND_LQ   1
-#define SOUND_HQ   2
+//#define SOUND_LQ   1
+//#define SOUND_HQ   2
 
 #define PERF_LOW    0
 #define PERF_MIDDLE 1
